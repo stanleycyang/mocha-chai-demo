@@ -17,51 +17,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
-var User = require('./app/models/User');
+// Source in routes
+var UserRoutes = require('./app/routes/UserRoutes')
 
-router.get('/users', function(request, response, next){
-    User.find(function(error, users){
-        if(error) return response.send(error);
-        response.send(users);
-    });
-});
-
-router.get('/users/:id', function(request, response, next){
-    User.findOne({_id: request.params.id}, function(error, user){
-        if(error) return response.send(error);
-        response.send(user);
-    });
-});
-
-router.post('/users', function(request, response, next){
-    var user = new User({
-       name: request.body.name 
-    });
-
-    user.save(function(error, user){
-        if(error) return response.send(error);
-        response.send(user);
-    });
-});
-
-router.put('/users/:id', function(request, response, next){
-    User.update({_id: request.params.id}, {
-        name: request.body.name
-    }, function(error, user){
-        if(error) return response.send(error);
-        response.send(user);
-    });
-});
-
-router.delete('/users/:id', function(request, response, next){
-    User.findByIdAndRemove(request.params.id, function(error){
-        if(error) return response.send(error);
-        response.send({success: true, id: request.params.id});
-    });
-});
-
-
-app.use('/', router);
+// Use the routes
+app.use('/users', UserRoutes);
 
 var server = http.createServer(app);
 server.listen(port);

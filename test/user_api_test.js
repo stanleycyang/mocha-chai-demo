@@ -25,18 +25,19 @@ describe('User', function(){
     });
 
     describe('#create', function(){
-/*        before(function(done){*/
-            //api.post('/users')
-                //.set('Accept', 'application/x-www-form-urlencoded')
-                //.send({
-                    //name: 'Stanley'
-                //})
-                //.expect('Content-Type', /json/)
-                //.expect(200)
-                //.end(function(error, response){
-                    //user = response;
-                //});
-        /*});*/
+        before(function(done){
+            api.post('/users')
+                .set('Accept', 'application/x-www-form-urlencoded')
+                .send({
+                    name: 'Stanley'
+                })
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end(function(error, response){
+                    var user = response;
+                    done();
+                });
+        });
         it('returns a new user', function(){
             api.post('/users')
                .set('Accept', 'application/x-www-form-urlencoded')
