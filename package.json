@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon main.js"
+    "start": "nodemon main.js",
+    "test": "./node_modules/mocha/bin/mocha --recursive ./test/"
   },
   "keywords": [],
   "author": "",
